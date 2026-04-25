@@ -3,81 +3,476 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0a0e2a">
-    <meta name="description" content="Colonel Clean Powerwashing — Commercial & Residential Pressure Washing, Water Proofing, and General Maintenance. Licensed & Insured. We Do It All A-Z!">
-    <title>Colonel Clean Powerwashing - We Do It All A-Z!</title>
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="description" content="Colonel Clean Powerwashing — 30 Years of NYC's Most Trusted Pressure Washing, Water Proofing & Maintenance. Commercial & Residential. Licensed & Insured. Often Copied, But Never Equaled.">
+    <title>Colonel Clean Powerwashing — 30 Years Strong | NYC's Finest</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Impact&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <!-- Grain Texture Overlay -->
     <div class="grain-overlay"></div>
 
-    <div class="main-container">
-        <!-- Header -->
-        <header class="header-box glass-card animate-in">
-            <div class="logo-area">
-                <img src="assets /logo-no-bg.png" alt="Colonel Clean Bulldog Mascot" class="site-logo">
-            </div>
-            <div class="title-area">
-                <h1 class="blink-text">COLONEL CLEAN</h1>
-                <h2>PRESSURE WASHING &amp; MAINTENANCE SYSTEMS</h2>
-                <div class="ticker-strip">
-                    <marquee behavior="scroll" direction="left" scrollamount="6" class="slogan-marquee">
-                        "WE DO IT ALL A-Z!" &nbsp;&nbsp;&nbsp;&nbsp; COMMERCIAL &amp; RESIDENTIAL &nbsp;&nbsp;&nbsp;&nbsp; LICENSED &amp; INSURED &nbsp;&nbsp;&nbsp;&nbsp; CALL 24/7!
-                    </marquee>
-                </div>
-            </div>
-        </header>
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
 
-        <!-- Hero Video -->
-        <section class="hero-video-section glass-card animate-in">
-            <span class="video-badge">★ SEE US IN ACTION! ★</span>
-            <div class="video-wrapper">
-                <video autoplay loop muted playsinline>
-                    <source src="assets /work-truck-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </section>
-
-        <!-- Content Grid -->
-        <section class="content-section">
-             <div class="glass-card animate-in">
-                <h3 class="section-title">OUR SERVICES</h3>
-                <ul class="service-list">
-                    <li>Pressure Washing</li>
-                    <li>Water Proofing</li>
-                    <li>General Maintenance</li>
-                    <li>Commercial Cleaning</li>
-                    <li>Residential PowerWash</li>
-                </ul>
-                <img src="assets /work-truck.jpg" alt="Our Work Truck" class="truck-img">
-             </div>
-
-             <div class="glass-card animate-in">
-                <h3 class="section-title">CONTACT THE COLONEL</h3>
-                <img src="assets /old-businesscard-front.jpg" alt="Colonel Clean Business Card" class="card-img">
-                <div class="contact-info">
-                    <p class="contact-label">Call Now</p>
-                    <a href="tel:9175351639" class="cta-btn">917-535-1639</a>
-                    <p class="availability">AVAILABLE 24/7</p>
-                </div>
-                 <div class="hit-counter">
-                    <p>You are visitor number:</p>
-                    <span id="counter-value">0004245</span>
-                </div>
-             </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer-box animate-in">
-            <p>Copyright &copy; 1996 - <span id="current-year"></span>. Colonel Clean Powerwashing.<br>
-            <a href="http://www.ColonelClean.com">www.ColonelClean.com</a></p>
-            <br>
-            <img src="assets /street-sign-banner.jpg" alt="Colonel Clean Sign" class="sign-img">
-        </footer>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <img src="assets /logo-no-bg.png" alt="Colonel Clean" class="loader-logo">
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+            <p class="loader-text">EST. 1996 — NYC</p>
+        </div>
     </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-brand">
+                <img src="assets /logo-no-bg.png" alt="Colonel Clean" class="nav-logo">
+                <span class="nav-brand-text">COLONEL CLEAN</span>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#legacy" class="nav-link">30 Years</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#action" class="nav-link">In Action</a></li>
+                <li><a href="#tribute" class="nav-link">The Colonel</a></li>
+                <li><a href="#contact" class="nav-link cta-nav">Get a Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--              HERO SECTION              -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="assets /hero-bg.png" alt="" class="hero-bg-img">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-particles" id="heroParticles"></div>
+        <div class="hero-content">
+            <div class="hero-badge animate-in">
+                <span class="badge-icon">★</span>
+                <span>EST. 1996 — NEW YORK CITY</span>
+            </div>
+            <h1 class="hero-title animate-in">
+                <span class="title-line title-serif">Colonel</span>
+                <span class="title-line title-bold">CLEAN</span>
+            </h1>
+            <p class="hero-subtitle animate-in">PRESSURE WASHING & MAINTENANCE SYSTEMS</p>
+            <div class="hero-tagline animate-in">
+                <span class="tagline-quote">"Often Copied, But Never Equaled"</span>
+            </div>
+            <div class="hero-stats animate-in">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="30">0</span>
+                    <span class="stat-label">Years Strong</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="10000">0</span>
+                    <span class="stat-label">Jobs Done</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number twenty-four">24/7</span>
+                    <span class="stat-label">Available</span>
+                </div>
+            </div>
+            <div class="hero-ctas animate-in">
+                <a href="tel:9175351639" class="btn btn-primary">
+                    <span class="btn-icon">📞</span> Call Now — 917-535-1639
+                </a>
+                <a href="#services" class="btn btn-outline">
+                    See Our Work <span class="btn-arrow">→</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--           MARQUEE STRIP                -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="marquee-strip">
+        <div class="marquee-track">
+            <span>★ WE DO IT ALL A-Z ★</span>
+            <span>COMMERCIAL & RESIDENTIAL</span>
+            <span>★ LICENSED & INSURED ★</span>
+            <span>FREE ESTIMATES</span>
+            <span>★ 30 YEARS IN BUSINESS ★</span>
+            <span>OFTEN COPIED, NEVER EQUALED</span>
+            <span>★ WE DO IT ALL A-Z ★</span>
+            <span>COMMERCIAL & RESIDENTIAL</span>
+            <span>★ LICENSED & INSURED ★</span>
+            <span>FREE ESTIMATES</span>
+            <span>★ 30 YEARS IN BUSINESS ★</span>
+            <span>OFTEN COPIED, NEVER EQUALED</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--         30 YEARS LEGACY SECTION        -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="legacy-section" id="legacy">
+        <div class="section-container">
+            <div class="legacy-header animate-in">
+                <span class="section-eyebrow">Our Legacy</span>
+                <h2 class="section-heading">
+                    <span class="heading-accent">30</span> Years<br>
+                    <em class="heading-italic">& Counting</em>
+                </h2>
+                <p class="section-intro">Since 1996, Colonel Clean has been NYC's most trusted name in pressure washing. Three decades of grit, grind, and spotless results across the five boroughs.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item animate-in" data-year="1996">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">1996</span>
+                        <h3>The Beginning</h3>
+                        <p>Colonel Clean Powerwashing is born on the streets of New York City. One man, one truck, one mission.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-in" data-year="2001">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2001</span>
+                        <h3>Expanding the Fleet</h3>
+                        <p>Growing demand leads to a bigger fleet and a full crew. Commercial contracts start rolling in.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-in" data-year="2010">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2010</span>
+                        <h3>A-Z Services</h3>
+                        <p>From pressure washing to property management, demolitions to solar panel cleaning — we now do it all, A to Z.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-in" data-year="2020">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2020</span>
+                        <h3>Next Generation</h3>
+                        <p>The Colonel Clean legacy continues. Same grit, same standards, new energy. The family business carries on.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-in" data-year="2026">
+                    <div class="timeline-dot active"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2026</span>
+                        <h3>30 Years Strong</h3>
+                        <p>Three decades of excellence. Still NYC's finest. Still often copied, but never equaled.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="skyline-divider">
+            <img src="assets /nyc-skyline.png" alt="" class="skyline-img">
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--           SERVICES SECTION             -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="services-section" id="services">
+        <div class="section-container">
+            <div class="services-header animate-in">
+                <span class="section-eyebrow">What We Do</span>
+                <h2 class="section-heading">
+                    Full Service<br>
+                    <em class="heading-italic">A to Z</em>
+                </h2>
+                <p class="section-intro">Whatever the job, we've got you covered. Residential and commercial — no project too big, no detail too small.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card animate-in" data-service="pressure">
+                    <div class="service-icon">💧</div>
+                    <h3>Pressure Washing</h3>
+                    <p>Buildings, sidewalks, stoops — blasted clean</p>
+                </div>
+                <div class="service-card animate-in" data-service="waterproof">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Water Proofing</h3>
+                    <p>Protect your property from the elements</p>
+                </div>
+                <div class="service-card animate-in" data-service="roofing">
+                    <div class="service-icon">🏠</div>
+                    <h3>Roofing & Cleaning</h3>
+                    <p>Roof maintenance and deep cleaning</p>
+                </div>
+                <div class="service-card animate-in" data-service="gutter">
+                    <div class="service-icon">🔧</div>
+                    <h3>Gutter Whitening</h3>
+                    <p>Restore gutters to pristine condition</p>
+                </div>
+                <div class="service-card animate-in" data-service="driveway">
+                    <div class="service-icon">🛤️</div>
+                    <h3>Driveway Sealing</h3>
+                    <p>Seal and protect driveways & walkways</p>
+                </div>
+                <div class="service-card animate-in" data-service="deck">
+                    <div class="service-icon">🪵</div>
+                    <h3>Decks & Fences</h3>
+                    <p>Cleaning, staining, and restoration</p>
+                </div>
+                <div class="service-card animate-in" data-service="solar">
+                    <div class="service-icon">☀️</div>
+                    <h3>Solar Panel Cleaning</h3>
+                    <p>Keep your panels at peak efficiency</p>
+                </div>
+                <div class="service-card animate-in" data-service="mold">
+                    <div class="service-icon">🧪</div>
+                    <h3>Mold Specialist</h3>
+                    <p>Expert mold remediation services</p>
+                </div>
+                <div class="service-card animate-in" data-service="fleet">
+                    <div class="service-icon">🚛</div>
+                    <h3>Fleet Washing</h3>
+                    <p>Commercial fleet cleaning services</p>
+                </div>
+                <div class="service-card animate-in" data-service="painting">
+                    <div class="service-icon">🎨</div>
+                    <h3>Painting</h3>
+                    <p>Interior & exterior painting</p>
+                </div>
+                <div class="service-card animate-in" data-service="kitchen">
+                    <div class="service-icon">🍽️</div>
+                    <h3>Commercial Kitchens</h3>
+                    <p>Deep clean to code compliance</p>
+                </div>
+                <div class="service-card animate-in" data-service="property">
+                    <div class="service-icon">🏢</div>
+                    <h3>Property Management</h3>
+                    <p>Full maintenance contracts available</p>
+                </div>
+            </div>
+
+            <div class="services-banner animate-in">
+                <div class="banner-content">
+                    <span class="banner-star">★</span>
+                    <span class="banner-text">FREE ESTIMATES — CALL TODAY</span>
+                    <span class="banner-star">★</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--          IN ACTION SECTION             -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="action-section" id="action">
+        <div class="section-container">
+            <div class="action-header animate-in">
+                <span class="section-eyebrow">See The Difference</span>
+                <h2 class="section-heading">
+                    In Action<br>
+                    <em class="heading-italic">On The Streets</em>
+                </h2>
+            </div>
+
+            <div class="action-grid">
+                <div class="action-video animate-in">
+                    <div class="video-container">
+                        <video autoplay loop muted playsinline id="workVideo">
+                            <source src="assets /work-truck-video.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-badge-floating">
+                            <span>★ SEE US IN ACTION</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-before-after animate-in">
+                    <div class="ba-container" id="baContainer">
+                        <img src="assets /before-after.png" alt="Before and After Pressure Washing" class="ba-img">
+                        <div class="ba-label ba-label-before">BEFORE</div>
+                        <div class="ba-label ba-label-after">AFTER</div>
+                        <div class="ba-slider" id="baSlider">
+                            <div class="ba-handle">
+                                <span>⟨⟩</span>
+                            </div>
+                        </div>
+                        <div class="ba-overlay" id="baOverlay"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-truck animate-in">
+                <img src="assets /work-truck.jpg" alt="Colonel Clean Work Truck" class="truck-showcase">
+                <div class="truck-caption">
+                    <span>The Colonel Clean Fleet — Rolling Through NYC Since '96</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--         TRIBUTE SECTION                -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="tribute-section" id="tribute">
+        <div class="section-container">
+            <div class="tribute-inner animate-in">
+                <div class="tribute-flame">
+                    <div class="flame-icon">🕯️</div>
+                </div>
+                <span class="section-eyebrow tribute-eyebrow">In Loving Memory</span>
+                <h2 class="tribute-heading">
+                    The Original<br>
+                    <span class="tribute-name">Colonel Clean</span>
+                </h2>
+                <div class="tribute-card-display">
+                    <img src="assets /old-businesscard-front.jpg" alt="Colonel Clean Original Business Card" class="tribute-card-img">
+                </div>
+                <div class="tribute-text">
+                    <p>He built this company from the ground up — one handshake, one job, one satisfied customer at a time. With nothing but a pressure washer, a bulldog by his side, and the heart of a warrior, he turned Colonel Clean into a New York City institution.</p>
+                    <p>For 30 years, his name has stood for quality, integrity, and the kind of work ethic that's rare in this city. He was often copied, but never equaled.</p>
+                    <p class="tribute-closing">His legacy lives on in every job we do. Every building we clean. Every customer we serve. This one's for you, Colonel.</p>
+                </div>
+                <div class="tribute-quote">
+                    <blockquote>"Often Copied, But Never Equaled"</blockquote>
+                </div>
+                <div class="tribute-dates">
+                    <span>Forever in our hearts</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--           CONTACT SECTION              -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="contact-section" id="contact">
+        <div class="section-container">
+            <div class="contact-header animate-in">
+                <span class="section-eyebrow">Get In Touch</span>
+                <h2 class="section-heading">
+                    Ready to Get<br>
+                    <em class="heading-italic">Clean?</em>
+                </h2>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info-card animate-in">
+                    <div class="contact-call-block">
+                        <p class="contact-label">Call The Colonel</p>
+                        <a href="tel:9175351639" class="contact-phone">917-535-1639</a>
+                        <div class="contact-availability">
+                            <span class="pulse-dot"></span>
+                            <span>AVAILABLE 24/7</span>
+                        </div>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-detail-item">
+                            <span class="detail-icon">📍</span>
+                            <span>Serving All 5 Boroughs — NYC</span>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="detail-icon">🌐</span>
+                            <a href="http://www.ColonelClean.com">www.ColonelClean.com</a>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="detail-icon">📋</span>
+                            <span>Licensed & Insured</span>
+                        </div>
+                    </div>
+                    <img src="assets /street-sign-banner.jpg" alt="Colonel Clean Street Sign" class="contact-sign-img">
+                </div>
+
+                <div class="contact-form-card animate-in">
+                    <h3 class="form-title">Request a Free Estimate</h3>
+                    <form class="quote-form" id="quoteForm">
+                        <div class="form-group">
+                            <label for="formName">Your Name</label>
+                            <input type="text" id="formName" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="formPhone">Phone Number</label>
+                            <input type="tel" id="formPhone" placeholder="(917) 555-1234" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="formService">Service Needed</label>
+                            <select id="formService" required>
+                                <option value="">Select a service...</option>
+                                <option>Pressure Washing</option>
+                                <option>Water Proofing</option>
+                                <option>Driveway Sealing</option>
+                                <option>Gutter Whitening</option>
+                                <option>Roofing & Cleaning</option>
+                                <option>Decks & Fences</option>
+                                <option>Solar Panel Cleaning</option>
+                                <option>Mold Specialist</option>
+                                <option>Fleet Washing</option>
+                                <option>Painting</option>
+                                <option>Commercial Kitchen</option>
+                                <option>Property Management</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="formMessage">Message</label>
+                            <textarea id="formMessage" placeholder="Tell us about your project..." rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full" id="formSubmit">
+                            <span>Get Free Estimate</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--              FOOTER                    -->
+    <!-- ═══════════════════════════════════════ -->
+    <footer class="site-footer">
+        <div class="footer-skyline">
+            <img src="assets /nyc-skyline.png" alt="" class="footer-skyline-img">
+        </div>
+        <div class="section-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets /logo-no-bg.png" alt="Colonel Clean" class="footer-logo">
+                    <p class="footer-tagline">"Often Copied, But Never Equaled"</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigate</h4>
+                    <a href="#hero">Home</a>
+                    <a href="#legacy">30 Years</a>
+                    <a href="#services">Services</a>
+                    <a href="#tribute">The Colonel</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-contact-col">
+                    <h4>Call Us</h4>
+                    <a href="tel:9175351639" class="footer-phone">917-535-1639</a>
+                    <p>Available 24/7</p>
+                    <p>All 5 Boroughs — NYC</p>
+                </div>
+            </div>
+
+            <div class="footer-counter">
+                <p>You are visitor number:</p>
+                <span id="counter-value">0004245</span>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright &copy; 1996 – <span id="current-year"></span>. Colonel Clean Powerwashing.</p>
+                <p><a href="http://www.ColonelClean.com">www.ColonelClean.com</a></p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
