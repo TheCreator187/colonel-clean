@@ -159,40 +159,59 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ──── BEFORE/AFTER SLIDER ────
-    const baContainer = document.getElementById('baContainer');
-    const baSlider = document.getElementById('baSlider');
-    const baOverlay = document.getElementById('baOverlay');
+    const baContainers = document.querySelectorAll('.ba-container');
 
-    if (baContainer && baSlider && baOverlay) {
+    baContainers.forEach(container => {
+        const slider = container.querySelector('.ba-slider');
+        const overlay = container.querySelector('.ba-overlay');
+        
+        if (!slider || !overlay) return;
+
         let isDragging = false;
 
         function updateSlider(x) {
-            const rect = baContainer.getBoundingClientRect();
+            const rect = container.getBoundingClientRect();
             let pos = ((x - rect.left) / rect.width) * 100;
             pos = Math.max(5, Math.min(95, pos));
-            baSlider.style.left = pos + '%';
-            baOverlay.style.width = (100 - pos) + '%';
+            slider.style.left = pos + '%';
+            overlay.style.width = (100 - pos) + '%';
         }
 
-        baContainer.addEventListener('mousedown', (e) => {
+        container.addEventListener('mousedown', (e) => {
             isDragging = true;
             updateSlider(e.clientX);
         });
-        document.addEventListener('mousemove', (e) => {
-            if (isDragging) updateSlider(e.clientX);
-        });
-        document.addEventListener('mouseup', () => isDragging = false);
+        
+        // Use document for global dragging events, scoped to the current active interaction
+        const onMouseMove = (e) => {
+            if (isDragging) {
+                updateSlider(e.clientX);
+                e.preventDefault(); // Prevent text selection
+            }
+        };
+        const onMouseUp = () => {
+            isDragging = false;
+        };
+        
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
 
         // Touch support
-        baContainer.addEventListener('touchstart', (e) => {
+        container.addEventListener('touchstart', (e) => {
             isDragging = true;
             updateSlider(e.touches[0].clientX);
-        });
-        document.addEventListener('touchmove', (e) => {
+        }, { passive: true });
+        
+        const onTouchMove = (e) => {
             if (isDragging) updateSlider(e.touches[0].clientX);
-        });
-        document.addEventListener('touchend', () => isDragging = false);
-    }
+        };
+        const onTouchEnd = () => {
+            isDragging = false;
+        };
+        
+        document.addEventListener('touchmove', onTouchMove, { passive: true });
+        document.addEventListener('touchend', onTouchEnd);
+    });
 
     // ──── HIT COUNTER ────
     let baseHits = 42069;
@@ -242,6 +261,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 3000);
         });
     }
+
+    // ──── SERVICE CARD CLICK TO REVEAL ────
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('click', () => {
+            // Close others for an accordion feel
+            document.querySelectorAll('.service-card').forEach(c => {
+                if (c !== card) c.classList.remove('active');
+            });
+            card.classList.toggle('active');
+        });
+    });
 
     // ──── SERVICE CARD TILT EFFECT ────
     if (window.innerWidth > 768) {

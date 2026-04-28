@@ -819,7 +819,7 @@ img { max-width: 100%; height: auto; display: block; }
     padding: 28px 24px;
     text-align: center;
     transition: all var(--transition);
-    cursor: default;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
 }
@@ -865,6 +865,35 @@ img { max-width: 100%; height: auto; display: block; }
     color: var(--cc-grey-400);
     position: relative;
     z-index: 1;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    transition: all var(--transition);
+}
+
+.service-card.active p {
+    max-height: 100px;
+    opacity: 1;
+    margin-top: 12px;
+}
+
+.service-card::after {
+    content: '+';
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--cc-yellow);
+    margin-top: 12px;
+    line-height: 1;
+    transition: transform var(--transition);
+    position: relative;
+    z-index: 1;
+}
+
+.service-card.active::after {
+    transform: rotate(45deg);
+    color: var(--cc-red);
 }
 
 /* Free Estimates banner */
@@ -926,16 +955,49 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .action-header .section-eyebrow::before { display: none; }
 
-.action-grid {
+.ba-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
     margin-bottom: 48px;
 }
 @media (min-width: 768px) {
-    .action-grid {
+    .ba-grid {
         grid-template-columns: 1fr 1fr;
     }
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+}
+@media (min-width: 768px) {
+    .video-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Cinematic Video Blending */
+.blend-video .video-container {
+    position: relative;
+    border: 1px solid var(--cc-grey-600);
+}
+.blend-video video {
+    filter: grayscale(20%) contrast(1.1) brightness(0.9);
+}
+.video-overlay-effect {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 40%, rgba(10,10,15,0.8) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+.blend-video .video-badge-floating.alt-badge {
+    background: var(--cc-yellow);
+    color: var(--cc-black);
+    box-shadow: 0 4px 16px var(--cc-yellow-glow);
 }
 
 .video-container {
