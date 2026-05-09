@@ -70,6 +70,8 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cc-dark-3) var(--cc-black);
 }
 
 body {
@@ -81,7 +83,6 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 a {
