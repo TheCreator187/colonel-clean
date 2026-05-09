@@ -897,7 +897,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .service-card.active p {
-    max-height: 100px;
+    max-height: 500px;
     opacity: 1;
     margin-top: 12px;
 }
