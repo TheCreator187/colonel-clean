@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             navbar.classList.remove('scrolled');
         }
-    });
+    }, { passive: true });
 
     // Mobile menu toggle
     hamburger.addEventListener('click', () => {
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 link.classList.add('active');
             }
         });
-    });
+    }, { passive: true });
 
     // ──── SCROLL ANIMATIONS ────
     const animatedEls = document.querySelectorAll('.animate-in');
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (scroll < window.innerHeight) {
                 heroBg.style.transform = `scale(1.1) translateY(${scroll * 0.3}px)`;
             }
-        });
+        }, { passive: true });
     }
 
     // ──── HERO PARTICLES ────
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let pos = ((x - rect.left) / rect.width) * 100;
             pos = Math.max(5, Math.min(95, pos));
             slider.style.left = pos + '%';
-            overlay.style.width = (100 - pos) + '%';
+            overlay.style.clipPath = `polygon(0 0, ${pos}% 0, ${pos}% 100%, 0 100%)`;
         }
 
         container.addEventListener('mousedown', (e) => {
