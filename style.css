@@ -1479,6 +1479,82 @@ img { max-width: 100%; height: auto; display: block; }
     box-shadow: 0 0 16px rgba(255, 230, 0, 0.1);
 }
 
+/* ── Portfolio CTA Card ── */
+.portfolio-cta {
+    margin-top: 56px;
+}
+.portfolio-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 40px 48px;
+    background: linear-gradient(135deg, var(--cc-dark-2), var(--cc-dark-3));
+    border: 1px solid var(--cc-grey-500);
+    border-radius: var(--radius-xl);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition);
+}
+.portfolio-cta-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 12px,
+        rgba(255, 230, 0, 0.02) 12px,
+        rgba(255, 230, 0, 0.02) 24px
+    );
+}
+.portfolio-cta-inner:hover {
+    border-color: var(--cc-yellow);
+    box-shadow: 0 0 40px rgba(255, 230, 0, 0.08), var(--shadow-lg);
+}
+.portfolio-cta-text {
+    position: relative;
+    z-index: 1;
+}
+.portfolio-cta-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--cc-yellow);
+    margin-bottom: 8px;
+    display: block;
+}
+.portfolio-cta-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cc-white);
+    line-height: 1;
+    margin-bottom: 12px;
+}
+.portfolio-cta-heading em {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: var(--cc-grey-200);
+    font-size: 0.7em;
+}
+.portfolio-cta-text p {
+    font-size: 0.95rem;
+    color: var(--cc-grey-300);
+    line-height: 1.6;
+    max-width: 420px;
+}
+.portfolio-cta-inner .btn {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
 /* ═══════════════════════════════════════
    TRIBUTE
    ═══════════════════════════════════════ */
