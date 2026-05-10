@@ -91,13 +91,16 @@ document.addEventListener("DOMContentLoaded", () => {
         animatedEls.forEach(el => el.classList.add('visible'));
     }
 
-    // ──── HERO PARALLAX ────
-    const heroBg = document.querySelector('.hero-bg-img');
-    if (heroBg && window.innerWidth > 768) {
+    // ──── HERO VIDEO PARALLAX ────
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo && window.innerWidth > 768) {
         window.addEventListener('scroll', () => {
             const scroll = window.scrollY;
             if (scroll < window.innerHeight) {
-                heroBg.style.transform = `scale(1.1) translateY(${scroll * 0.3}px)`;
+                const parallax = scroll * 0.2;
+                const opacity = 1 - (scroll / window.innerHeight) * 0.4;
+                heroVideo.style.transform = `scale(1.15) translateY(${parallax}px)`;
+                heroVideo.style.opacity = opacity;
             }
         }, { passive: true });
     }
