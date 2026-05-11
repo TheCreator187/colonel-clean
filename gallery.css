@@ -288,9 +288,11 @@
     transform: translateY(40px);
     transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
 }
-.gallery-pair.gp-visible {
-    opacity: 1;
-    transform: translateY(0);
+.gallery-pair.gp-visible,
+.grid-item.gp-visible,
+.video-item.gp-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 /* ──── Mobile Responsive ──── */
@@ -339,5 +341,179 @@
     }
     .gp-images {
         aspect-ratio: 3 / 4;
+    }
+}
+
+/* ──── Gallery Nav Filter ──── */
+.gallery-nav-filter {
+    position: sticky;
+    top: 70px;
+    z-index: 100;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--cc-grey-600);
+    padding: 12px 0;
+}
+.gnf-inner {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+}
+.gnf-link {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cc-grey-300);
+    text-decoration: none;
+    transition: color 0.3s var(--ease-out);
+    position: relative;
+}
+.gnf-link:hover {
+    color: var(--cc-white);
+}
+.gnf-link.active {
+    color: var(--cc-yellow);
+}
+.gnf-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--cc-yellow);
+    box-shadow: 0 0 10px var(--cc-yellow-glow);
+}
+
+/* ──── Gallery Grid Sections ──── */
+.gallery-grid-section {
+    padding: 100px 0;
+    background: var(--cc-black);
+    border-bottom: 1px solid var(--cc-grey-600);
+}
+.gallery-section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.gs-eyebrow {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--cc-red);
+    margin-bottom: 12px;
+}
+.gs-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--cc-white);
+    margin-bottom: 16px;
+    line-height: 1;
+}
+.gs-title em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--cc-yellow);
+    text-transform: none;
+    font-weight: 400;
+}
+.gs-desc {
+    font-size: 1.1rem;
+    color: var(--cc-grey-300);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* ──── Work Photo Grid ──── */
+.work-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 0 var(--container-pad);
+}
+.grid-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--cc-grey-500);
+    background: var(--cc-dark-2);
+    cursor: pointer;
+    transition: transform 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+}
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out);
+}
+.grid-item:hover {
+    transform: translateY(-8px);
+    border-color: var(--cc-yellow);
+}
+.grid-item:hover img {
+    transform: scale(1.08);
+}
+
+/* ──── Video Grid ──── */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 32px;
+    padding: 0 var(--container-pad);
+}
+.video-item {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--cc-grey-500);
+    background: var(--cc-dark-2);
+    cursor: pointer;
+}
+.video-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.video-item:hover video {
+    transform: scale(1.05);
+}
+
+/* ──── Mobile Responsive Updates ──── */
+@media (max-width: 768px) {
+    .gallery-nav-filter {
+        top: 60px;
+    }
+    .gnf-inner {
+        gap: 16px;
+    }
+    .gnf-link {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+    }
+    .gallery-grid-section {
+        padding: 60px 0;
+    }
+    .work-photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .video-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .work-photo-grid {
+        grid-template-columns: 1fr;
     }
 }
