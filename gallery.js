@@ -1,11 +1,6 @@
-/* ═══════════════════════════════════════════════
-   COLONEL CLEAN — GALLERY PAGE JS
-   Immersive B/A Slider + Navigation
-   ═══════════════════════════════════════════════ */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ──── MOBILE NAV ────
+    // Mobile nav
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     if (hamburger) {
@@ -21,14 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ──── FOOTER YEAR ────
+    // Footer year
     const yearSpan = document.getElementById("current-year");
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-    // ──── FULLSCREEN B/A SLIDERS ────
-    const pairs = document.querySelectorAll('.gallery-pair');
-
-    pairs.forEach(pair => {
+    // Before / after sliders
+    document.querySelectorAll('.gallery-pair').forEach(pair => {
         const images = pair.querySelector('.gp-images');
         const beforeWrap = pair.querySelector('.gp-before-wrap');
         const sliderLine = pair.querySelector('.gp-slider-line');
@@ -46,9 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
             beforeWrap.style.clipPath = `polygon(0 0, ${pos}% 0, ${pos}% 100%, 0 100%)`;
             sliderLine.style.left = pos + '%';
             handle.style.left = pos + '%';
+            images.setAttribute('aria-valuenow', Math.round(pos));
         }
 
-        // Mouse events
         images.addEventListener('mousedown', (e) => {
             isDragging = true;
             updatePosition(e.clientX);
@@ -66,16 +59,13 @@ document.addEventListener("DOMContentLoaded", () => {
             isDragging = false;
         });
 
-        // Touch events
         images.addEventListener('touchstart', (e) => {
             isDragging = true;
             updatePosition(e.touches[0].clientX);
         }, { passive: true });
 
         document.addEventListener('touchmove', (e) => {
-            if (isDragging) {
-                updatePosition(e.touches[0].clientX);
-            }
+            if (isDragging) updatePosition(e.touches[0].clientX);
         }, { passive: true });
 
         document.addEventListener('touchend', () => {
@@ -83,64 +73,119 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ──── SCROLL-SPY SUB-NAV ────
-    const subNavLinks = document.querySelectorAll('.gnf-link');
+    // Sticky section nav
+    const subNavLinks = document.querySelectorAll('.gnf-pill');
     const sections = ['transformations', 'field-photos', 'action-clips'];
 
     function updateSubNav() {
-        let current = "";
+        let current = sections[0];
         sections.forEach(id => {
             const section = document.getElementById(id);
-            if (section) {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= sectionTop - 150) {
-                    current = id;
-                }
+            if (section && window.scrollY >= section.offsetTop - 160) {
+                current = id;
             }
         });
 
         subNavLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
+            link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
         });
     }
 
-    window.addEventListener('scroll', updateSubNav);
+    window.addEventListener('scroll', updateSubNav, { passive: true });
+    updateSubNav();
 
-    // ──── VIDEO HOVER PLAY ────
-    const videoItems = document.querySelectorAll('.video-item video');
-    videoItems.forEach(video => {
-        video.parentElement.addEventListener('mouseenter', () => {
-            video.play().catch(e => console.log("Video play interrupted"));
+    // Video hover play
+    document.querySelectorAll('.video-item').forEach(item => {
+        const video = item.querySelector('video');
+        if (!video) return;
+
+        item.addEventListener('mouseenter', () => {
+            video.play().catch(() => {});
+            item.classList.add('is-playing');
         });
-        video.parentElement.addEventListener('mouseleave', () => {
+
+        item.addEventListener('mouseleave', () => {
             video.pause();
+            video.currentTime = 0;
+            item.classList.remove('is-playing');
+        });
+
+        item.addEventListener('click', () => {
+            if (video.paused) {
+                video.play().catch(() => {});
+                item.classList.add('is-playing');
+            } else {
+                video.pause();
+                item.classList.remove('is-playing');
+            }
         });
     });
 
-    // ──── SCROLL FADE-IN ────
-    const animatedEls = document.querySelectorAll('.gallery-pair, .grid-item, .video-item, .gallery-section-header');
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    const photoButtons = Array.from(document.querySelectorAll('[data-lightbox]'));
+    let currentPhotoIndex = 0;
+
+    function openLightbox(index) {
+        if (!lightbox || !lightboxImg || !photoButtons.length) return;
+        currentPhotoIndex = index;
+        const src = photoButtons[index].dataset.lightbox;
+        lightboxImg.src = src;
+        lightboxImg.alt = photoButtons[index].querySelector('img')?.alt || 'Work photo';
+        lightbox.hidden = false;
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.hidden = true;
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    function showPhoto(step) {
+        const next = (currentPhotoIndex + step + photoButtons.length) % photoButtons.length;
+        openLightbox(next);
+    }
+
+    photoButtons.forEach((btn, i) => {
+        btn.addEventListener('click', () => openLightbox(i));
+    });
+
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightboxPrev?.addEventListener('click', () => showPhoto(-1));
+    lightboxNext?.addEventListener('click', () => showPhoto(1));
+
+    lightbox?.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (lightbox?.hidden) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPhoto(-1);
+        if (e.key === 'ArrowRight') showPhoto(1);
+    });
+
+    // Scroll fade-in
+    const animatedEls = document.querySelectorAll('.gallery-pair, .grid-item, .video-item, .section-header.animate-in');
     if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('gp-visible'); entry.target.style.opacity = ''; entry.target.style.transform = '';
-                    if (entry.target.classList.contains('grid-item') || entry.target.classList.contains('video-item')) {
-                        entry.target.style.transitionDelay = (Math.random() * 0.2) + 's';
-                    }
+                    entry.target.classList.add('gp-visible');
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
-        animatedEls.forEach(el => {
-            if (!el.classList.contains('gallery-section-header')) {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
-            }
-            observer.observe(el);
-        });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        animatedEls.forEach(el => observer.observe(el));
+    } else {
+        animatedEls.forEach(el => el.classList.add('gp-visible'));
     }
 });
